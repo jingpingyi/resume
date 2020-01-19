@@ -35,6 +35,7 @@ hr {
 } 
 .topNavBar > nav {
 	float: right;
+	margin-top: 10px;
 }
 .banner {
 	height: 515px;
