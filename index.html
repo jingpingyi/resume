@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>易景平的个人简历</title>
 	<link rel="stylesheet" href="./main.css">
 	<link rel="stylesheet" href="//at.alicdn.com/t/font_666490_f17j3sp0fue.css">
+
 </head>
+
 <body>
 	<div class="topNav">
 		<div class="topNavBar clearfix">
@@ -21,26 +24,26 @@
 					<li><a href="">博客</a></li>
 					<li><a href="">日历</a></li>
 					<li><a href="">联系方式</a></li>
-					<li><a href="">其他</a></li>	
+					<li><a href="">其他</a></li>
 				</ul>
-				</nav>
+			</nav>
 		</div>
 	</div>
-	
+
 	<div class="banner">
-	<div class="mask"></div>
+		<div class="mask"></div>
 	</div>
 	<main>
 		<div class="userCard">
 			<div class="pictureAndText clearfix">
 				<div class="picture">
-					<img src="tx.jpg" alt="头像">
+					<img src="./imgs/tx.jpg" alt="头像">
 				</div>
 				<div class="text">
 					<div class="profile">
 						<span class="welcome">hello</span>
 						<h1>易景平</h1>
-						<p>前端开发工程师</p>	
+						<p>前端开发工程师</p>
 						<hr>
 						<dl class="clearfix">
 							<dt>年龄</dt>
@@ -55,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-		
+
 			<footer class="media">
 				<a href="#"><i class="iconfont icon-twitter"></i></a>
 				<a href="#"><i class="iconfont icon-GitHub"></i></a>
@@ -63,39 +66,61 @@
 				<a href="#"><i class="iconfont icon-zhihu1"></i></a>
 			</footer>
 		</div>
-		<a href="#" class="button">下载PDF简历</a>
-		<p>
+		<p class="downloadResume"><a href="./resume.pdf" target="_blank" download>下载PDF简历</a></p>
+
+		<p class="introduce">
 			易景平， 前端工程师，饥人谷前端学生，现在在 饥人谷 学前端课程。<br>
-      技能：前端开发，Rails 开发，Node.js 开发
+			技能：前端开发，Rails 开发，Node.js 开发
 		</p>
 	</main>
-	<section>
+	<section class='skills'>
 		<h2>技能</h2>
-			<ol>
-				<li>HTML5&amp;CSS3</li>
-				<li>JavaScript</li>
-				<li>JQuery</li>
-				<li>vue</li>
-				<li>React</li>
-				<li>HTTP</li>
-			</ol>
+		<ol class="clearfix">
+			<li class="skill1">HTML5&amp;CSS3</li>
+			<li class="skill2">JavaScript</li>
+			<li class="skill3">JQuery</li>
+			<li class="skill4">vue</li>
+			<li class="skill5">React</li>
+			<li class="skill6">HTTP</li>
+		</ol>
 	</section>
-	<section>
+	<section class="portfolio">
 		<h2>作品集</h2>
 		<nav>
-			<ol>
-				<li>所有</li>
-				<li>框架</li>
-				<li>原生JS&nmp;CSS</li>
+			<ol class="clearfix">
+				<li id="portfolio1">所有</li>
+				<li id="portfolio2">框架</li>
+				<li id="portfolio3">原生JS&nmp;CSS</li>
 			</ol>
-		</nav>
-		<div class="jobs">
-				<div class="big"></div>
-				<div class="small"></div>
-				<div class="small"></div>
-				<div>ddddd</div>
+			<div id="portfolioBar" class="bar state-1">
+				<div class="bar-inner"></div>
 			</div>
-	</section>
-</body>
-</html>
+		</nav>
+		<div class="works">
+			<div class="big">
+				<img src="./imgs/1.jpg" alt="作品1">
+			</div>
+			<div class="small">
+				<img src="./imgs/2.jpg" alt="作品2">
 
+			</div>
+			<div class="small">
+				<img src="./imgs/3.jpg" alt="作品3">
+
+			</div>
+		</div>
+	</section>
+	<script> 
+		portfolio1.onclick=function(){
+			portfolioBar.className = 'bar state-1'
+		}
+		portfolio2.onclick=function(){
+			portfolioBar.className = 'bar state-2'
+		}
+		portfolio3.onclick=function(){
+			portfolioBar.className = 'bar state-3'
+		}
+	</script>
+</body>
+
+</html>
