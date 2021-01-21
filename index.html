@@ -22,9 +22,9 @@
 			</a>
 			<nav>
 				<ul>
-					<li class="menuTrigger"><a href="#about">关于</a></li>
-					<li class="menuTrigger"><a href="#skills">技能</a></li>
-					<li class="menuTrigger">
+					<li class="menuTrigger hidden"><a href="#about">关于</a></li>
+					<li class="menuTrigger hidden"><a href="#skills">技能</a></li>
+					<li class="menuTrigger hidden">
 						<a href="#portfolio">作品</a>
 						<ul class="submenu">
 							<li>作品1</li>
@@ -32,7 +32,7 @@
 							<li>作品3</li>
 						</ul>
 					</li>
-					<li class="menuTrigger" class="menuTrigger">
+					<li class="menuTrigger hidden" class="menuTrigger">
 						<a href="">博客</a>
 						<ul class="submenu">
 							<li>博客1</li>
@@ -40,9 +40,9 @@
 							<li>博客3</li>
 						</ul>
 					</li>
-					<li class="menuTrigger"><a href="">日历</a></li>
-					<li class="menuTrigger"><a href="">联系方式</a></li>
-					<li class="menuTrigger"><a href="">其他</a></li>
+					<li class="menuTrigger hidden"><a href="">日历</a></li>
+					<li class="menuTrigger hidden"><a href="">联系方式</a></li>
+					<li class="menuTrigger hidden"><a href="">其他</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -141,26 +141,30 @@
 	</script>
 </body>
 <script>
+	//网页加载动画
 	document.onreadystatechange = function () {
 		if (document.readyState == 'complete') {
 			setTimeout(removeAnimation, 500)
 		}
 	}
 	function removeAnimation() { siteWelcome.classList.remove('active') }
+	//menu 动画
 	var liTags = document.querySelectorAll('.menuTrigger')
 	for(let i = 0;i<liTags.length;i++){
 		liTags[i].onmouseenter = function(e){
 			let li = e.currentTarget
-			let ul = li.getElementsByTagName('ul')[0]
-			li.classList.add('active')
+			li.classList.add('show')
+			li.classList.remove('hidden')
 		}
 		liTags[i].onmouseleave = function(e){
 			let li = e.currentTarget
-			let ul = li.getElementsByTagName('ul')[0]
-			li.classList.remove('active')
+			li.classList.remove('show')
+			li.classList.add('hidden')
+			
 		}
 	}
 	
+	//menu点击定位移动
 		let atags = document.querySelectorAll('nav>ul>li>a')
 		for(let i = 0; i<atags.length; i++){
 			atags[i].onclick = function(e){

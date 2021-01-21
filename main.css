@@ -11,7 +11,7 @@ hr { height: 0; border: none; border-top: 1px solid #dedede; }
 .topNavBar-inner nav>ul>li { float: left; font-size: 13px; font-weight: bold; font-family: Verdana; margin: auto 17px; color: inherit;position: relative; }
 .topNavBar-inner nav>ul>li a { padding-bottom: 6px;position:relative; }
 
-.topNavBar-inner nav>ul>li.active a::after {
+.topNavBar-inner nav>ul>li.show a::after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -23,20 +23,46 @@ hr { height: 0; border: none; border-top: 1px solid #dedede; }
 	width: 100%;
 	animation: showUnderline .3s;
 }
-.topNavBar-inner nav>ul>li.active>.submenu{
-	display:block;
+.topNavBar-inner nav>ul>li.hidden a::after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	height: 3px;
+	border-radius: 2px;
+	background-color:#E8676B; 
+	visibility: hidden;
+	animation: hiddenUndline .2s;
+}
+.topNavBar-inner nav>ul>li.show>.submenu{
+	/* display:block; */
+	visibility: visible;
 	animation: showSubmenu .3s;
 }
+.topNavBar-inner nav>ul>li.hidden>.submenu{
+	animation: hiddenSubmenu .2s;
+}
+@keyframes hiddenSubmenu {
+	0%{margin-right: 0%; visibility: visible;opacity: 1;}
+	100%{margin-right: 100% ;visibility: hidden;opacity: 0;}
+	
+}
 @keyframes showUnderline {
-	0%{width: 0;}
-	100%{width: 100%}
+	0%{width: 0;visibility: hidden;}
+	100%{width: 100%; visibility: visible;}
+}
+@keyframes hiddenUndline {
+	0%{width: 100%; visibility:visible;}
+	100%{width: 1%;visibility: hidden;}
 }
 @keyframes showSubmenu {
-	0%{margin-right: 100%; opacity: 0;}
-	100%{margin-right: 0; opacity: 1;}
+	0%{margin-right: 100%; visibility: hidden;opacity: 0;}
+	100%{margin-right: 0; visibility: visible;opacity: 1;}
 }
 .topNavBar .submenu{
-	display:none;
+	display:block;
+	visibility: hidden;
 	position: absolute;
 	top: 150%;
 	right: 0;
@@ -50,6 +76,8 @@ hr { height: 0; border: none; border-top: 1px solid #dedede; }
 	white-space: nowrap;
 	margin: 5px 0;
 }
+.topNavBar .submenu{cursor: pointer;}
+.topNavBar .submenu > li:hover {color:#E8676B;}
 
 .banner { height: 515px; background-image: url(./imgs/resumebg.jpg); background-position: center center; background-size: cover; }
 .topNavBar-inner { margin-top: 3px; }
