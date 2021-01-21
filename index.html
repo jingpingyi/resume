@@ -1,100 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-hans">
 
 <head>
 	<meta charset="UTF-8">
 	<title>易景平的个人简历</title>
 	<link rel="stylesheet" href="./main.css">
+	<link rel="stylesheet" href="./loading.css">
 	<link rel="stylesheet" href="//at.alicdn.com/t/font_666490_f17j3sp0fue.css">
-
 </head>
-<style type="text/css">
-	.site-welcome.active{
-		display: flex;
-	}
-	.site-welcome{
-		display: none;
-		justify-content: center;
-		align-items: center;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 1;
-		background-color: #ddd;
-	}
-	.loading {
-		width: 200px;
-		height: 200px;
-		position: absolute;
-	}
-
-	.loading::before,
-	.loading::after {
-		content: '';
-		width: 10px;
-		height: 10px;
-		background: #333;
-		border-radius: 50%;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		margin: auto;
-		animation: load 2s linear infinite
-	}
-
-	.loading::after {
-		animation-delay: 1s;
-	}
-
-	@keyframes load {
-		0% {
-			width: 0px;
-			height: 0px;
-			opacity: 1;
-		}
-
-		100% {
-			width: 60px;
-			height: 60px;
-			opacity: 0;
-		}
-	}
-	
-</style>
 
 <body>
 	<div id="siteWelcome" class="site-welcome active">
 		<div class="loading"></div>
 	</div>
-	<div class="topNav">
-		<div class="topNavBar clearfix">
+
+	<div id="topNavBar" class="topNavBar">
+		<div class="topNavBar-inner clearfix">
 			<a href="#" class="logo" alt="logo">
 				<span class="rs">RS</span>
 				<span class="card">card</span>
 			</a>
 			<nav>
 				<ul>
-					<li><a href="">关于</a></li>
-					<li><a href="">技能</a></li>
-					<li><a href="">作品</a></li>
-					<li><a href="">博客</a></li>
-					<li><a href="">日历</a></li>
-					<li><a href="">联系方式</a></li>
-					<li><a href="">其他</a></li>
+					<li class="menuTrigger"><a href="#about">关于</a></li>
+					<li class="menuTrigger"><a href="#skills">技能</a></li>
+					<li class="menuTrigger">
+						<a href="#portfolio">作品</a>
+						<ul class="submenu">
+							<li>作品1</li>
+							<li>作品2</li>
+							<li>作品3</li>
+						</ul>
+					</li>
+					<li class="menuTrigger" class="menuTrigger">
+						<a href="">博客</a>
+						<ul class="submenu">
+							<li>博客1</li>
+							<li>博客2</li>
+							<li>博客3</li>
+						</ul>
+					</li>
+					<li class="menuTrigger"><a href="">日历</a></li>
+					<li class="menuTrigger"><a href="">联系方式</a></li>
+					<li class="menuTrigger"><a href="">其他</a></li>
 				</ul>
 			</nav>
 		</div>
 	</div>
-
 	<div class="banner">
 		<div class="mask"></div>
 	</div>
 	<main>
-		<div class="userCard">
+		<div id="about" class="userCard">
 			<div class="pictureAndText clearfix">
 				<div class="picture">
 					<img src="./imgs/tx.jpg" alt="头像">
@@ -118,7 +75,6 @@
 					</div>
 				</div>
 			</div>
-
 			<footer class="media">
 				<a href="#"><i class="iconfont icon-twitter"></i></a>
 				<a href="#"><i class="iconfont icon-GitHub"></i></a>
@@ -133,7 +89,7 @@
 			技能：前端开发，Rails 开发，Node.js 开发
 		</p>
 	</main>
-	<section class='skills'>
+	<section id="skills" class='skills'>
 		<h2>技能</h2>
 		<ol class="clearfix">
 			<li class="skill1">HTML5&amp;CSS3</li>
@@ -144,7 +100,7 @@
 			<li class="skill6">HTTP</li>
 		</ol>
 	</section>
-	<section class="portfolio">
+	<section id="portfolio" class="portfolio">
 		<h2>作品集</h2>
 		<nav>
 			<ol class="clearfix">
@@ -166,24 +122,55 @@
 			</div>
 			<div class="small">
 				<img src="./imgs/3.jpg" alt="作品3">
-
 			</div>
 		</div>
 	</section>
 	<script>
-		siteWelcome.classList.remove('active')
-	</script>
-	<script>
-		portfolio1.onclick = function () {
-			portfolioBar.className = 'bar state-1'
+		portfolio1.onclick = function () { portfolioBar.className = 'bar state-1' }
+		portfolio2.onclick = function () { portfolioBar.className = 'bar state-2' }
+		portfolio3.onclick = function () { portfolioBar.className = 'bar state-3' }
+
+		window.onscroll = function (e) {
+			if (scrollY > 80) {
+				topNavBar.classList.add('sticky')
+			} else {
+				topNavBar.classList.remove('sticky')
+			}
 		}
-		portfolio2.onclick = function () {
-			portfolioBar.className = 'bar state-2'
-		}
-		portfolio3.onclick = function () {
-			portfolioBar.className = 'bar state-3'
-		}
+
 	</script>
 </body>
-
-</html>
+<script>
+	document.onreadystatechange = function () {
+		if (document.readyState == 'complete') {
+			setTimeout(removeAnimation, 500)
+		}
+	}
+	function removeAnimation() { siteWelcome.classList.remove('active') }
+	var liTags = document.querySelectorAll('.menuTrigger')
+	for(let i = 0;i<liTags.length;i++){
+		liTags[i].onmouseenter = function(e){
+			let li = e.currentTarget
+			let ul = li.getElementsByTagName('ul')[0]
+			li.classList.add('active')
+		}
+		liTags[i].onmouseleave = function(e){
+			let li = e.currentTarget
+			let ul = li.getElementsByTagName('ul')[0]
+			li.classList.remove('active')
+		}
+	}
+	
+		let atags = document.querySelectorAll('nav>ul>li>a')
+		for(let i = 0; i<atags.length; i++){
+			atags[i].onclick = function(e){
+				e.preventDefault()
+				let a = e.currentTarget
+				let href = a.getAttribute('href')
+				let element = document.querySelector(href)
+				let top = element.offsetTop
+				window.scrollTo(0,top - 70)
+			}
+		}
+</script>
+<thtml>
