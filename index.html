@@ -52,7 +52,7 @@
 		<div class="mask"></div>
 	</div>
 	<main>
-		<div id="about" class="userCard">
+		<div data-x id="about" class="userCard">
 			<div class="pictureAndText clearfix">
 				<div class="picture">
 					<img src="./imgs/tx.jpg" alt="头像">
@@ -90,7 +90,7 @@
 			技能：前端开发，Rails 开发，Node.js 开发
 		</p>
 	</main>
-	<section id="skills" class='skills'>
+	<section data-x id="skills" class='skills'>
 		<h2>技能</h2>
 		<ol class="clearfix">
 			<li class="skill1">HTML5&amp;CSS3</li>
@@ -101,7 +101,7 @@
 			<li class="skill6">HTTP</li>
 		</ol>
 	</section>
-	<section id="portfolio" class="portfolio">
+	<section data-x id="portfolio" class="portfolio">
 		<h2>作品集</h2>
 		<nav>
 			<ol class="clearfix">
@@ -130,43 +130,91 @@
 		portfolio1.onclick = function () { portfolioBar.className = 'bar state-1' }
 		portfolio2.onclick = function () { portfolioBar.className = 'bar state-2' }
 		portfolio3.onclick = function () { portfolioBar.className = 'bar state-3' }
+		let specilTags = document.querySelectorAll('[data-x]')
+		for (let i = 0; i < specilTags.length; i++) {
+			specilTags[i].classList.add('offset')
+		}
+		setTimeout(function(){
+			removeOffset()
+			findAndHighlight() 
+		},400)
 
+		
 		window.onscroll = function (e) {
 			if (scrollY > 80) {
 				topNavBar.classList.add('sticky')
 			} else {
 				topNavBar.classList.remove('sticky')
 			}
-		}
-
-	</script>
-</body>
-<script>
-	//网页加载动画
-	document.onreadystatechange = function () {
-		if (document.readyState == 'complete') {
-			setTimeout(removeAnimation, 500)
-		}
-	}
-	function removeAnimation() { siteWelcome.classList.remove('active') }
-	//menu 动画
-	var liTags = document.querySelectorAll('.menuTrigger')
-	for(let i = 0;i<liTags.length;i++){
-		liTags[i].onmouseenter = function(e){
-			let li = e.currentTarget
-			li.classList.add('show')
-			li.classList.remove('hidden')
-		}
-		liTags[i].onmouseleave = function(e){
-			let li = e.currentTarget
-			li.classList.remove('show')
-			li.classList.add('hidden')
+			findAndHighlight() 
+			removeOffset()
+			skillBarSlide()
 			
 		}
-	}
-	
-	//menu点击定位移动
-		let atags = document.querySelectorAll('nav>ul>li>a')
+		function skillBarSlide(){
+			let skills = document.querySelectorAll('.skills>ol>li')
+			let skillSection = document.querySelector('.skills')
+			let s = (skillSection.offsetTop + 200) - window.scrollY -window.innerHeight
+			if(s <0 ){
+				for(let i = 0;i<skills.length;i++){
+					skills[i].classList.add('slide')
+				}
+			}
+		}
+			
+		function removeOffset(){
+			let specilTags = document.querySelectorAll('[data-x]')
+			//出现在视口下方时就可以移除offset，不必等到达视口顶
+			for(let i = 0;i<specilTags.length; i++){
+				let startHight =  (specilTags[i].offsetTop + 180) - window.scrollY -window.innerHeight
+				if(startHight < 0){
+				specilTags[i].classList.remove('offset')
+				}
+			}
+		}
+		function findAndHighlight(){
+			// 找到当前视口元素，并把对应的菜单栏高亮
+			let specilTags = document.querySelectorAll('[data-x]')
+			let minIndex = 0
+			for (let i = 0; i < specilTags.length; i++) {
+				if (Math.abs(specilTags[i].offsetTop - window.scrollY) < Math.abs(specilTags[minIndex].offsetTop - window.scrollY)) {
+					minIndex = i
+				}
+			}
+			let id = specilTags[minIndex].id
+			let aTag = document.querySelector('a[href="#'+  id + '"]')
+			let siblings = aTag.parentNode.parentNode.children
+			for(let i = 0;i<siblings.length; i++){
+				siblings[i].classList.remove('highlight')
+			}
+			aTag.parentNode.classList.add('highlight')
+
+		}
+		//网页加载动画
+		document.onreadystatechange = function () {
+			if (document.readyState == 'complete') {
+				setTimeout(removeAnimation, 500)
+			}
+		}
+		function removeAnimation() { siteWelcome.classList.remove('active') }
+		//menu 动画
+		var liTags = document.querySelectorAll('.menuTrigger')
+		for(let i = 0;i<liTags.length;i++){
+			liTags[i].onmouseenter = function(e){
+				let li = e.currentTarget
+				li.classList.add('show')
+				li.classList.remove('hidden')
+			}
+			liTags[i].onmouseleave = function(e){
+				let li = e.currentTarget
+				li.classList.remove('show')
+				li.classList.add('hidden')
+				
+			}
+		}
+		
+		//menu点击定位移动
+		var atags = document.querySelectorAll('nav>ul>li>a')
 		for(let i = 0; i<atags.length; i++){
 			atags[i].onclick = function(e){
 				e.preventDefault()
@@ -192,5 +240,7 @@
 					.start() // Start the tween immediately.
 			}
 		}
-</script>
+
+	</script>
+</body>
 <thtml>

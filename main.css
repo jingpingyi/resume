@@ -10,22 +10,14 @@ hr { height: 0; border: none; border-top: 1px solid #dedede; }
 .topNavBar-inner>nav { float: right; margin-top: 7px; }
 .topNavBar-inner nav>ul>li { float: left; font-size: 13px; font-weight: bold; font-family: Verdana; margin: auto 17px; color: inherit;position: relative; }
 .topNavBar-inner nav>ul>li a { padding-bottom: 6px;position:relative; }
-
-.topNavBar-inner nav>ul>li.show a::after {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 100%;
-	left: 0;
-	height: 3px;
-	border-radius: 2px;
-	background-color:#E8676B; 
+.topNavBar-inner nav>ul>li.show a::after,
+.topNavBar-inner nav>ul>li.highlight a::after {
 	width: 100%;
-	animation: showUnderline .3s;
+	visibility: visible;
 }
-.topNavBar-inner nav>ul>li.hidden a::after {
+.topNavBar-inner nav>ul>li a::after{
 	content: '';
-	display: block;
+	/* display: block; */
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -33,15 +25,24 @@ hr { height: 0; border: none; border-top: 1px solid #dedede; }
 	border-radius: 2px;
 	background-color:#E8676B; 
 	visibility: hidden;
-	animation: hiddenUndline .2s;
+	width:1%;
+	transition: all .2s;
 }
 .topNavBar-inner nav>ul>li.show>.submenu{
-	/* display:block; */
 	visibility: visible;
-	animation: showSubmenu .3s;
+	animation: showSubmenu .2s;
 }
 .topNavBar-inner nav>ul>li.hidden>.submenu{
 	animation: hiddenSubmenu .2s;
+}
+[data-x].offset {
+	transform: translateY(100px);
+	opacity: 0;
+}
+[data-x] {
+	opacity: 1;
+	transform: translateY(0);
+	transition: all .5s;
 }
 @keyframes hiddenSubmenu {
 	0%{margin-right: 0%; visibility: visible;opacity: 1;}
@@ -61,6 +62,7 @@ hr { height: 0; border: none; border-top: 1px solid #dedede; }
 	100%{margin-right: 0; visibility: visible;opacity: 1;}
 }
 .topNavBar .submenu{
+	
 	display:block;
 	visibility: hidden;
 	position: absolute;
@@ -68,13 +70,14 @@ hr { height: 0; border: none; border-top: 1px solid #dedede; }
 	right: 0;
 	background: white;
 	color: #3d4451;
-	padding: 5px 10px;
-	box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-	animation: hiddenSubmenu .3s;
+	padding: 5px 20px;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);;
+	/* animation: hiddenSubmenu .2s; */
 }
 .topNavBar .submenu > li {
 	white-space: nowrap;
-	margin: 5px 0;
+	margin: 7px 0;
+
 }
 .topNavBar .submenu{cursor: pointer;}
 .topNavBar .submenu > li:hover {color:#E8676B;}
@@ -108,15 +111,16 @@ hr { margin: 18px 0; }
 section.skills>h2, section.portfolio>h2 { margin-bottom: 24px; text-align: center; line-height: 1.4; font-size: 34px; font-weight: 400; }
 section.skills, section.portfolio { width: 940px; margin: 70px auto; }
 section.skills ol { background-color: white; box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5); padding: 14px 28px 40px; }
-section.skills ol li { position: relative; line-height: 2; float: left; width: 46%; margin: 15px 16px 10px; padding-bottom: 5px; color: #6E747D; }
+section.skills ol li { position: relative; overflow: hidden; line-height: 2; float: left; width: 46%; margin: 15px 16px 10px; padding-bottom: 5px; color: #6E747D; }
 section.skills ol li::before { content: ''; display: block; height: 5px; width: 100%; background-color: #FAE1E1; position: absolute; bottom: 0px; border-radius: 3px; }
-section.skills ol li::after { content: ''; display: block; height: 5px; /* width: 50%; */ background-color: #E8676B; position: absolute; bottom: 0px; border-radius: 3px; }
+section.skills ol li::after { content: ''; display: block; height: 5px; background-color: #E8676B; position: absolute;left:-100%;  bottom: 0px; border-radius: 3px; }
 .skill1::after { width: 80%; } 
 .skill2::after { width: 80%; }
 .skill3::after { width: 50%; }
 .skill4::after { width: 30%; } 
 .skill5::after { width: 60%; }
 .skill6::after { width: 70%; }
+.skills>ol>li.slide::after{left:0;transition: all .4s;}
 section.portfolio { text-align: center; }
 section.portfolio>nav { text-align: center; display: inline-block; margin-bottom: 30px; }
 section.portfolio>nav>ol { display: inline-block; }
